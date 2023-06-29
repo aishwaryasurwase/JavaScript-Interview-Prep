@@ -134,6 +134,5 @@
 
 // 1) Creation phase
 // 3 things happes - it create global window object
-// all variable and functions declared
+// setup the memory heap for storing the variables and functions. all variable and functions declared
 // variables are initiliazed with undefined and in case of function whole function will store
-
