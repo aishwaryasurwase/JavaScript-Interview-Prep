@@ -126,7 +126,7 @@
 // ----
 
 // Hoisting
-
+// During the creation phase JS engine moves the variables and functions declarations to top of code
 // Execution context
 // It has 2 phases
 // 1) Creation phase
@@ -136,3 +136,50 @@
 // 3 things happes - it create global window object
 // setup the memory heap for storing the variables and functions. all variable and functions declared
 // variables are initiliazed with undefined and in case of function whole function will store
+
+// 2) Execution phase javascript engine executes the code line by line
+// assigning the values to variables and executes the function calls
+// and also for every new function new execution context is created
+
+// let a = 10;
+// function multiply(x) {
+//   return x * 10;
+// }
+// let b = multiply(a);
+// console.log(b);
+
+// // creation phase
+
+// a = undefined
+// multiply: function multiply(x) {
+//   return x * 10;
+// }
+// b = undefined
+
+// Execution phase
+// a = 10;
+// Start function execution
+// x = 10;
+// b = 100
+
+// Call stack - which is mechanisms to keep track of all the functions call
+// Temporal dead zone - time between declaration and initialization
+
+// function a() {
+//   console.log(b); // undefined
+//   var b = 10;
+// }
+
+// a();
+// ---
+
+// function a() {
+//   console.log(b); // undefined
+//   console.log(c); // ReferenceError: Cannot access 'c' before initialization
+//   console.log(d); // ReferenceError: Cannot access 'd' before initialization
+//   var b = 10;
+//   let c = 20;
+//   const d = 30;
+// }
+
+// a();
