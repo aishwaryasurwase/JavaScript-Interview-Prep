@@ -74,8 +74,17 @@
 // -----
 // console.log([..."Aishwarya"]);
 // ---
-const user = { name: "Aishwarya", age: 21 };
-const admin = { admin: true, ...user };
+// const user = { name: "Aishwarya", age: 21 };
+// const admin = { admin: true, ...user };
 
-console.log(admin);
-console.log((1 === 1) === 1);
+// console.log(admin);
+// console.log((1 === 1) === 1);
+// ---
+
+const settings = {
+  username: "Aishwarya",
+  level: 19,
+  health: 90,
+};
+const data = JSON.stringify(settings, ["level", "health"]);
+console.log(data);
