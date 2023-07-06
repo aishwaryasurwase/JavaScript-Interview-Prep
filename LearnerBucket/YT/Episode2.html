@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom cookies</title>
+</head>
+<body>
+    <!-- Cookies are way to store data on the client side on browser -->
+    <h1>Custom Cookies</h1>
+    <script>
+
+        const separateKeyVal =(str)=>{
+            return str.split('=').map((el)=> el.trim())
+        }
+        const getCookieString = (str) =>{
+            let [first, ...rest]= str.split(';');
+            let [key, val]= separateKeyVal(first);
+            let options = {}
+            for(let option of rest){
+                let [k, v] = separateKeyVal(option);
+                options[k] = v;
+            }
+            return{
+                key, 
+                val,
+                options
+            }
+        }
+        function useCustomCookie(){
+            let store = new Map();
+            Object.defineProperty(document, 'myCookie', {
+                configurable: true,
+                set(s){
+                    let {key, val, options} = getCookieString(s);
+                    let expiry = Infinity;
+                    if(options['max-age']){
+                        expiry = Date.now() + options['max-age']*1000;
+                    }
+                    store.set(key, {val, expiry})
+                    console.log("STR", store);
+                }, 
+                get(){
+                    const time = Date.now();
+                    let cookie = [];
+                    for(let [key,{val, expiry}] of store){
+                        if(expiry <= time){
+                            store.delete(key);
+                        }else{
+                            cookie.push(`${key}=${val}`);
+                        }
+                    }
+                    return cookie.join(';');
+                }
+            })
+        }
+        useCustomCookie();
+
+        document.myCookie = "name=Aishwarya;max-age=1;host=localhost";
+        document.myCookie= "blog=LearnerBucket";
+        console.log("Cookie" , document.myCookie);
+        setTimeout(()=>{
+            console.log("Cookie", document.myCookie);
+        }, 1500)
+
+        // document.cookie = "name=Aishwarya;max-age=1;host=localhost";
+        // document.cookie= "blog=LearnerBucket";
+        // console.log("Cookie" , document.cookie);
+        // setTimeout(()=>{
+        //     console.log("Cookie", document.cookie);
+        // }, 2500)
+    </script>
+</body>
+</html>
