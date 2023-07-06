@@ -1,5 +1,4 @@
-// https://learnersbucket.com/javascript-sde-cheat-sheet/
-
+// https://learnersbucket.com/tutorials/es6/var-let-and-const/
 // -----
 
 // // let, const and var
